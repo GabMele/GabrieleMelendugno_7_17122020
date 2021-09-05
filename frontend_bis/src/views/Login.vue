@@ -39,7 +39,6 @@ export default {
     },
     methods: {
         checkInputData() {
-            console.log('checkInputData START OK line 45');
             if ( !this.inputEmail || !this.inputPassword ) {
                     alert("Données saisies incompletes ou non valides !")
                     return this.isInvalid = true;
