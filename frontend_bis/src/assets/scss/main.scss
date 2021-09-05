@@ -1,0 +1,216 @@
+$red-gm: #D1515A;
+$gray-gm: #BBB8B2;
+$blue-gm: #2C3E5D;
+
+/*
+html, body {
+    margin:0px;
+    min-height:100%;
+}
+
+body{
+    min-height:100vh; margin:0; 
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+#app {
+    margin: 0;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+*/
+
+.main-bg {
+    background-color: $gray-gm;
+    filter: brightness(1.2);
+}
+
+.page-spacer {
+    background-color: $gray-gm;
+}
+
+
+.logo {
+    //object-fit: scale-down;    
+    &-top {
+        width: 250px;
+        height: 90px; 
+    }
+    &-footer {
+        width: 150px;
+        height: 100px;       
+    }
+    &-bg {
+        background-color: $blue-gm;
+    }
+}
+
+.footer-gm {
+    margin: 0;
+}
+
+
+.bg-red-gm {
+    background-color: #c6538c;
+}
+
+.bg-gray-gm {
+    background-color: #BBB8B2;
+}
+
+.bg-blue-gm {
+    background-color: #2C3E5D;
+    filter: brightness(1.2);
+}
+
+.hr {
+    height: 4px;
+    width: 80%;
+}
+
+
+.title-gm {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #091F43;
+}
+
+.bonjour-text-light {
+    font-weight: normal;
+}
+
+.bonjour-text-bold {
+    font-weight: bold;
+}
+
+.button-gm {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    border: solid 1px $blue-gm;
+    padding: 0.3rem 0.8rem;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    text-align:center;
+    color: $blue-gm;
+    background-color: white;
+    transition: all 0.3s;
+}
+  
+.button-gm:hover {
+    box-shadow: 0px 5px 30px rgba(100, 100, 100, 0.9);
+    background-color: $blue-gm;
+    color: white;
+}
+
+.btn-comment {
+    border-radius: 5px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+}
+
+
+.post-wrapper, .comment-wrapper {
+    max-width: 700px;
+    margin: auto;
+}
+
+.post-box, .text-area-gm, .inputUrl {
+    border: solid 3px $gray-gm;
+    border-radius: 15px;
+    padding: 1rem;
+    width: 100%;
+    outline: none;
+}
+
+/*
+.text-area-gm {
+    padding: 1rem;
+    width: 100%;
+    outline: none;
+}
+*/
+
+.comment-box {
+    border: solid 3px $gray-gm;
+    border-radius: 15px;
+    background-color: $gray-gm;
+}
+
+
+.post-image {
+    width: 100%;
+}
+
+  
+  /* form starting stylings ------------------------------- */
+  .group        { 
+    position:relative; 
+    margin-bottom:30px;
+    max-width: 400px;
+  }
+  input         {
+    font-size:1.2rem;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width: 100%;
+
+    //border:none;
+    border :1px solid #757575;
+    border-radius: 5px;
+
+  }
+  input:focus     { outline:none; }
+  
+  /* LABEL ======================================= */
+  label          {
+    color: $blue-gm; 
+    font-size: 1.1rem;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all; 
+    -moz-transition:0.2s ease all; 
+    -webkit-transition:0.2s ease all;
+  }
+  
+  /* active state */
+  input:focus ~ label, input:valid ~ label    {
+    top:-20px;
+    font-size:1rem;
+    color: $blue-gm;
+  }
+  
+  /* BOTTOM BARS ================================= */
+  .bar  { position:relative; display:block; }
+  .bar:before, .bar:after   {
+    content:'';
+    height:3px; 
+    width:0;
+    bottom:1px; 
+    position:absolute;
+    background: $blue-gm; 
+    transition:0.3s ease all; 
+    -moz-transition:0.3s ease all; 
+    -webkit-transition:0.3s ease all;
+  }
+  .bar:before {
+    left:50%;
+  }
+  .bar:after {
+    right:50%; 
+  }
+  
+  /* active state */
+  input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width:50%;
+  }
