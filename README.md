@@ -20,7 +20,7 @@ node server
 
 - dans le dossier Frontend lancer 
 ```bash
-node run serve
+npm run serve
 ```
 
 En automatique l'application s'ouvrira à la page http://localhost:8080/
@@ -41,8 +41,10 @@ L'usager simple (admin=0) n'a pas accès à la page "Usagers".
 Le site permet de partager des messages avec des images et de les commenter, les vôtres et celles des autres. Les images sont ajouté via url.
 
 L'application est structuré sur 2 pages principales: Usages et Posts.
-Dans la page Posts sont affichés tous le posts et commentaires pour les admins, seulement les post validés ou écrits par l'usager logged. Tous le monde peut visualiser les posts validés et ajouter des commentaires, qui pourtant ne seront pas visualisés tant qu'un admin les ait validés.
-Chaque post et chaque commentaire affichera des bouttons selon son statut (validé ou pas), selon le statut de l'usager logged in, et selon si l'usager logged in est l'auteur du post ou commentaire.
+Dans la page Posts sont affichés tous le posts et commentaires si l'usager logged in est de type "admin", alors que pour les autres usager non admin ils seront affiché seulement les post validés ou écrits par l'usager logged. 
+Tous le monde peut visualiser les posts validés et ajouter des commentaires, qui pourtant ne seront pas visualisés tant qu'un admin les ait validés.
+
+Sur chaque post et chaque commentaire sont affiché des bouttons selon son statut (validé ou pas), selon le statut de l'usager logged in, et selon si l'usager logged in est l'auteur du post ou commentaire.
 
 J'essayé de respecter la charte graphique en utilisant 3 couleurs repérées via Color Picker sur le pdf du projet.
 
