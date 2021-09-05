@@ -181,7 +181,7 @@ export default {
         },
 */
         updateAdmin(userId,admin) {
-            alert('userid : ' + userId + '--- admin :' + admin);
+            //alert('userid : ' + userId + '--- admin :' + admin);
             axios.get("http://localhost:3000/api/user/updateadmin?userId=" + userId + "&admin=" + admin, {
                 headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
                 })
