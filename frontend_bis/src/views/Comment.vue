@@ -8,10 +8,8 @@
                     <h5 class="card-title mb-0" >Bonjour 
                         <span class="bonjour-text-bold"> {{ name }}</span>
                         <div class="d-flex mt-2 justify-content-center">
-                            <div v-if="admin == 1">
-                                <button @click="$router.push('MainWall')" class="button-gm mx-2 pt-2">Retourner aux posts</button>
-                            </div>
-                            <button @click="logout" class="button-gm pt-2">LOGOUT</button>
+                            <button v-if="admin == 1" @click="$router.push('MainWall')" class="button-gm mx-2 pt-2">Retourner aux posts</button>
+                            <button @click="logout" class="button-gm mx-2 pt-2">LOGOUT</button>
                         </div>
                     </h5>
                 </div>
@@ -135,6 +133,8 @@
 <script>
 import axios from "axios";
 import router from "../router";
+import VueJwtDecode from "vue-jwt-decode";
+import ls from 'localstorage-slim';
 
 export default {
     name: "Comment",
@@ -156,17 +156,27 @@ export default {
         }
     },
     mounted() {   
-        this.name           = localStorage.getItem('name');
-        this.userId         = localStorage.getItem('userId');
-        this.admin          = localStorage.getItem('admin');            
-        this.postId         = localStorage.getItem('postId');
-        this.postUserId     = localStorage.getItem('postUserId');
-        this.postName       = localStorage.getItem('postName');
-        this.postContent    = localStorage.getItem('postContent');  
-        this.postImageUrl   = localStorage.getItem('postImageUrl');
-        this.postStatus     = localStorage.getItem('postStatus');
-        this.postCreatedAt  = localStorage.getItem('postCreatedAt');
 
+        let token = localStorage.getItem("token");
+        try {
+            let decoded = VueJwtDecode.decode(token);
+            this.userId = decoded.userId;
+            this.name = decoded.name;
+            this.admin = decoded.admin;
+            this.status = decoded.status;    
+
+        } catch (error) {
+            console.log(error, 'error from decoding token')
+        }
+
+        ls.config.encrypt = true;           
+        this.postId         = ls.get('postId', { decrypt: true });
+        this.postUserId     = ls.get('postUserId', { decrypt: true });
+        this.postName       = ls.get('postName', { decrypt: true });
+        this.postContent    = ls.get('postContent', { decrypt: true });  
+        this.postImageUrl   = ls.get('postImageUrl', { decrypt: true });
+        this.postStatus     = ls.get('postStatus', { decrypt: true });
+        this.postCreatedAt  = ls.get('postCreatedAt', { decrypt: true });
 
         axios.get("http://localhost:3000/api/comment/getallbypost/" + this.postId,
             { headers: {"Authorization": "Bearer " + localStorage.getItem('token') } })
@@ -206,8 +216,6 @@ export default {
                     router.push({ path : "/MainWall" }) })
                 .catch((error) => { 
                     console.log(error);
-                    //location.reload()
-                    //vm.$forceUpdate();
                     router.push({ path : "/MainWall" })
             })} else {
                 return
@@ -219,14 +227,10 @@ export default {
                 headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
                 })
             .then((res) => {
-                //alert("Post " + postId + " validé !");
                 router.push({ path : "/MainWall" });
-                //vm.$forceUpdate();
                 console.log(res)})
             .catch((error) => { 
                 console.log(error);
-                //location.reload()
-                //vm.$forceUpdate();
                 router.push({ path : "/MainWall" })
             })
         },
@@ -261,55 +265,28 @@ export default {
                 headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
                 })
             .then((res) => {
-                //alert("comment " + commentId + " validé !");
                 router.push({ path : "/MainWall" });
-                //vm.$forceUpdate();
                 console.log(res)})
             .catch((error) => { 
                 console.log(error);
-                //location.reload()
-                //vm.$forceUpdate();
                 router.push({ path : "/MainWall" })
             })
         },
 
         send() {
-            if ( !localStorage.getItem('name') ) {
+            if ( !this.commentContent ) {
                 this.isOk = true;
-                //console.log("this.file : " + this.file)
-                alert("Se connecter ou s'inscrire !");
-                router.push('/');
-            } else if ( !this.commentContent ) {
-                this.isOk = true;
-                //console.log("this.file : " + this.file)
                 alert("Commentaire vide, écrivez-le. ")
             } else {
 
-                //const formData = new FormData()
-                /*
-                console.log("---------------------------");
-                console.log(localStorage.getItem('userId'));
-                console.log(localStorage.getItem('postId'));
-                console.log(this.commentContent.toString());
-                console.log("---------------------------");
-                */
-                //formData.append("userId", localStorage.getItem('userId'))
-                //formData.append("postId", localStorage.getItem('postId'))
-                //formData.append("commentq", this.commentContent.toString())
-
                 var postData = {
-                userId: localStorage.getItem('userId'),
-                postId: localStorage.getItem('postId'),
+                userId: this.userId,
+                postId: this.postId,
                 comment: this.commentContent.toString()                
                 };
 
                 console.log(postData);
                 console.table(postData);
-
-                //console.log("====formData=====")
-                //console.log(formData)
-                //formData.append("image", this.file)
-                //axios.post("http://localhost:3000/api/comment/create", formData, { headers: { "Authorization":"Bearer " + localStorage.getItem("token")}})
 
                 axios.post("http://localhost:3000/api/comment/create", postData, { headers: { "Authorization":"Bearer " + localStorage.getItem("token")}})
 
@@ -317,8 +294,6 @@ export default {
                     this.userId = ""
                     this.postId = ""
                     this.commentContent = ""
-                    //alert('Publication réussie !')
-                    //router.push({path : 'Allposts'})
                     this.$router.go(this.$router.currentRoute)
                 })
                 .catch((error)=>{
@@ -326,7 +301,6 @@ export default {
                 })
             }
         },
-
     }
 }
 </script>

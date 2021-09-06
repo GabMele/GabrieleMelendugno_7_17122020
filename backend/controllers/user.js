@@ -39,10 +39,9 @@ exports.signup = (req, res, next) => {
 };
 
 
-
   exports.login = (req, res, next) => {
     console.log(req.body.email);
-    Models.User.findOne({ where: {email: req.body.email, status: 1} })
+    Models.User.findOne({ where: {email: req.body.email } })
       .then(user => {
         if (!user) {
           return res.status(401).json({ error: 'Utilisateur non trouvé !' });
@@ -53,14 +52,11 @@ exports.signup = (req, res, next) => {
               return res.status(401).json({ error: 'Mot de passe incorrect !' });
             }
             res.status(200).json({
-              userId : user.id,
-              name   : user.name,
-              admin  : user.admin,
-              status : user.status,
               token  : jwt.sign(
-                { userId: user._id },
+                { userId: user.id, name: user.name, admin: user.admin, status: user.status },
                 'RANDOM_TOKEN_SECRET',
                 { expiresIn: '24h' }
+
               )
             });
           })
@@ -94,9 +90,6 @@ exports.signup = (req, res, next) => {
       .then(users => res.status(200).json({ users }))
       .catch(error => res.status(400).json({ error }));
   };
-
-
-
 
 
   exports.delete = (req, res, next) => {
@@ -147,18 +140,3 @@ exports.signup = (req, res, next) => {
       })
       .catch(error => res.status(500).json({ error }));
   };
-
-
-/*
-  exports.makeadmin = (req, res, next) => {
-    Models.User.findOne({ where: {id: req.params.uid} })
-      .then(user => {
-        Models.User.update(
-          { admin: 1},
-          { where: {id: req.params.uid} })
-            .then(() => res.status(200).json({ message: 'Usager supprimée !'}))
-            .catch(error => res.status(400).json({ error }));
-      })
-      .catch(error => res.status(500).json({ error }));
-  };
-  */

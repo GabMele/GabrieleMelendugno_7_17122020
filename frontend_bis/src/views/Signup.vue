@@ -57,7 +57,6 @@ export default {
                     name     : this.inputName, 
                     email    : this.inputEmail,
                     password : this.inputPassword,
-                    // admin : 0  // for future development 
                 })
                 .then(() => {
                     console.log('Signup OK !');

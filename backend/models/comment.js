@@ -8,17 +8,17 @@ module.exports = (sequelize, DataTypes) => {
       }
     });
     Comment.associate = function(models){ 
-   /*   models.Comment.belongsTo(models.User,{foreignKey:{allowNull:false}});
-      models.Comment.belongsTo(models.Post,{foreignKey:{allowNull:false}});
-   */
-
+ 
       
       models.User.hasMany(models.Post, { onDelete: 'cascade' });
       models.User.hasMany(models.Comment, { onDelete: 'cascade' });     
       models.Post.hasMany(models.Comment, { onDelete: 'cascade' });
-      models.Post.belongsTo(models.User, { onDelete: 'cascade' });
-      models.Comment.belongsTo(models.User, { onDelete: 'cascade' });     
-      models.Comment.belongsTo(models.Post, { onDelete: 'cascade' });
+      models.Post.belongsTo(models.User, { foreignKeyConstraint: true
+        , onDelete: 'cascade' });
+      models.Comment.belongsTo(models.User, { foreignKeyConstraint: true
+        , nDelete: 'cascade' });     
+      models.Comment.belongsTo(models.Post, { foreignKeyConstraint: true
+        , onDelete: 'cascade' });
       
       
   };

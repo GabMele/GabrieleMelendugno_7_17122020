@@ -17,17 +17,16 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
   User.associate = function(models){ 
- /*   models.User.hasMany(models.Post);
-    models.User.hasMany(models.Comment);
- */
 
-    
     models.User.hasMany(models.Post, { onDelete: 'cascade' });
     models.User.hasMany(models.Comment, { onDelete: 'cascade' });     
     models.Post.hasMany(models.Comment, { onDelete: 'cascade' });
-    models.Post.belongsTo(models.User, { onDelete: 'cascade' });
-    models.Comment.belongsTo(models.User, { onDelete: 'cascade' });     
-    models.Comment.belongsTo(models.Post, { onDelete: 'cascade' });
+    models.Post.belongsTo(models.User, { foreignKeyConstraint: true
+      , onDelete: 'cascade' });
+    models.Comment.belongsTo(models.User, { foreignKeyConstraint: true
+      , onDelete: 'cascade' });     
+    models.Comment.belongsTo(models.Post, { foreignKeyConstraint: true
+      , onDelete: 'cascade' });
  
   };
   return User;

@@ -52,17 +52,23 @@ export default {
             .then((res) => {
                 console.log("RES ===== >");
                 console.log(res);
+                console.log('res.data.token :');
+                console.log(res.data.token);
+                
+                localStorage.setItem("token", res.data.token)
+                /*
                 localStorage.setItem("userId",  res.data.userId)
                 localStorage.setItem("name",    res.data.name)
                 localStorage.setItem("admin",   res.data.admin)
                 localStorage.setItem("status",  res.data.status)
-                localStorage.setItem("token",   res.data.token)
+                
+                */
                 router.push({ path : 'MainWall'});
             })
             .catch((error) => {
                 this.isInvalid = true;
                 console.log(error);
-                alert('Compte non existant ou pas encore validé !')
+                alert('Compte non existant ou password non correcte !')
             })         
         }
     }
