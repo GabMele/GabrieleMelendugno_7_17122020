@@ -1,10 +1,14 @@
 # Projet 7 - Groupomania Messagerie d'entreprise
 ## "Postmania"
 
-## de Gabriele Melendugno
+de Gabriele Melendugno
+
+# Intro
+
+L'application est une messagerie interne pour une entreprise, comme un Facebook en version simplifié : ça permet aux usagers de publier de messages et de commenter les messages des autres usagers. 
 
 
-INSTRUCTIONS
+# INSTRUCTIONS
 
 - Installer Node.js
 
