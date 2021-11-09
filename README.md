@@ -29,7 +29,7 @@ En automatique l'application s'ouvrira à la page http://localhost:8080/
 
 ## Fonctionnement 
 
-L'application consiste dans une messagerie comme un Facebook en version simplifié : ça permet aux usagers de publier de messages et de commenter les messages des autres usagers. 
+L'application est une messagerie interne pour une entreprise, comme un Facebook en version simplifié : ça permet aux usagers de publier de messages et de commenter les messages des autres usagers. 
 
 Il existe 2 genres d'usager : simple et admin. Le profil admin peut valider (approuver) usagers, posts et commentaires.
 Le rôle d'administrateur est défini par le champ "admin" = 1 (usager simple sera admin = 0); un admin peut promovoir un usager simple au rôle d'admin et au contraire.
