@@ -8,7 +8,7 @@ de Gabriele Melendugno
 L'application consiste en une messagerie interne pour une entreprise, comme un Facebook en version simplifié : ça permet aux usagers de publier de messages et de commenter les messages des autres usagers. 
 
 
-# INSTRUCTIONS
+## INSTRUCTIONS
 
 - Installer Node.js
 
