@@ -12,16 +12,16 @@ L'application consiste en une messagerie interne pour une entreprise, comme un F
 
 - Installer Node.js
 
-- installer le database
+- Installer le database
 
 - Cloner ce repository en local;
 
-- dans le dossier Backend  lancer 
+- Dans le dossier Backend  lancer 
 ```bash
 node server
 ```
 
-- dans le dossier Frontend lancer 
+- Dans le dossier Frontend lancer 
 ```bash
 npm run serve
 ```
@@ -42,8 +42,9 @@ Chaque usager doit être validé par un admin pour pouvoir acceder aux fonctionn
 L'usager simple (admin=0) n'a pas accès à la page "Usagers".
 
 L'application est structurée sur 2 pages principales: Usages et Posts.
-Dans la page Posts sont affichés tous le posts et commentaires si l'usager logged in est de type "admin", alors que pour les autres usager non admin ils seront affiché seulement les post validés ou écrits par l'usager logged. 
+Dans la page Posts sont affichés tous le posts et commentaires si l'usager logged in est de type "admin", alors que pour les autres usager non admin ils seront affiché seulement les post validés ou écrits par l'usager logged-in. 
 Tous le monde peut visualiser les posts validés et ajouter des commentaires, qui pourtant ne seront pas visualisés tant qu'un admin les ait validés.
+J'ai utilisé la Local Storage pour stocker des données mais elles sont cryptées via le module "ls" (localstorage-slim).
 
 Sur chaque post et chaque commentaire sont affiché des bouttons selon son statut (validé ou pas), selon le statut de l'usager logged in, et selon si l'usager logged in est l'auteur du post ou commentaire.
 
